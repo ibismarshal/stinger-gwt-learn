@@ -1,0 +1,205 @@
+public class Hello implements EntryPoint {
+	int usercode;
+	final String[] users = new String[1000];
+	final String[] pass = new String[1000];
+	final String[] qn1 = new String[1000];
+	final String[] qn2 = new String[1000];
+	final String[] qn3 = new String[1000];
+	char a,b,c,d,e;
+	boolean flag=false;
+	@Override
+	public void onModuleLoad() {
+		// TODO Auto-generated method stub
+		HTML html = new HTML(
+			      "Step 1 <b>User Authentication</b>", true);
+		final TextBox text1 = new TextBox();
+		final PasswordTextBox text2 = new PasswordTextBox();
+		Label uc = new Label("Enter UserCode");
+		Label label1 = new Label("Enter UserName");
+		Label label2 = new Label("Enter Password");
+		final IntegerBox ucint = new IntegerBox();
+		Button reg = new Button("Register user");
+		Button login = new Button("Login");
+		final HorizontalPanel hpan1 = new HorizontalPanel();
+		final HorizontalPanel hpan2 = new HorizontalPanel();
+		final VerticalPanel vpan = new VerticalPanel();
+		vpan.add(uc);
+		vpan.add(ucint);
+		hpan1.add(label1);
+		hpan1.add(text1);
+		hpan2.add(label2);
+		hpan2.add(text2);
+		vpan.add(html);
+		vpan.add(hpan1);
+		vpan.add(hpan2);
+		vpan.add(reg);
+		vpan.add(login);
+		//Eof login UI
+		 HTML html1 = new HTML(
+			      "Step 3 <b>Questions and Answers</b>", true);
+		 ListBox qndrop_1 = new ListBox();
+		 qndrop_1.addItem("First pet?");
+		 qndrop_1.addItem("Fav. Color ? ");
+		 qndrop_1.addItem("Fav. Band ? ");
+		 qndrop_1.addItem("Fav. Song ? ");
+		 qndrop_1.addItem("First Workplace");
+		 qndrop_1.setVisibleItemCount(1);
+		 ListBox qndrop_2 = new ListBox();
+		 qndrop_2.addItem("First school ?");
+		 qndrop_2.addItem("First University ? ");
+		 qndrop_2.addItem("First Car ? ");
+		 qndrop_2.addItem("First Date ? ");
+		 qndrop_2.addItem("Fav. Hangout place ? ");
+		 qndrop_2.setVisibleItemCount(1);
+		 ListBox qndrop_3 = new ListBox();
+		 qndrop_3.addItem("Fav. Food ? ");
+		 qndrop_3.addItem("Fav. country ?");
+		 qndrop_3.addItem("Fav. person ? ");
+		 qndrop_3.addItem("Fav. Application ? ");
+		 qndrop_3.addItem("Fav. Director ?");
+		 qndrop_3.setVisibleItemCount(1);
+		Label label3 = new Label("Qn.1");
+		final TextBox text3 = new TextBox();
+		Label label4 = new Label("Qn.2");
+		final TextBox text4 = new TextBox();
+		Label label5 = new Label("Qn.3");
+		final TextBox text5 = new TextBox();
+		final Button but1 = new Button("Save answers");
+		final Button but2 = new Button("Check");
+		HorizontalPanel qnhpan1 = new HorizontalPanel();
+		HorizontalPanel qnhpan2 = new HorizontalPanel();
+		HorizontalPanel qnhpan3 = new HorizontalPanel();
+		final VerticalPanel vpan1 = new VerticalPanel();
+		final VerticalPanel vpan2 = new VerticalPanel();
+		final VerticalPanel vpan3 = new VerticalPanel();
+		//Label label6 = new Label("Enter Password ID no. :");
+		final IntegerBox txt = new IntegerBox();
+		final Button but3 = new Button();
+		final Button userc = new Button();
+		final ListBox cdrop = new ListBox();
+		final Label cdrop1 = new Label("Choose: ");
+		final TextBox cdisp = new TextBox();
+		qnhpan1.add(label3);
+		qnhpan1.add(qndrop_1);
+		qnhpan1.add(text3);
+		qnhpan2.add(label4);
+		qnhpan2.add(qndrop_2);
+		qnhpan2.add(text4);
+		qnhpan3.add(label5);
+		qnhpan3.add(qndrop_3);
+		qnhpan3.add(text5);
+		vpan1.add(html1);
+		vpan1.add(qnhpan1);
+		vpan1.add(qnhpan2);
+		vpan1.add(qnhpan3);
+		vpan1.add(but1);
+		vpan1.add(but2);
+		vpan1.setVisible(false);
+		vpan2.setVisible(false);
+		vpan3.setVisible(false);
+		//Eof Q&A UI
+		 HTML html2 = new HTML(
+			      "Step 2 <b>Captcha Test </b>", true);
+		 char[] alpha = new char[]{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+	        int i1;
+	        for (i1=0;i1<6;i1++){
+	          a = (alpha)[new Random().nextInt(alpha.length)];
+	          b = (alpha)[new Random().nextInt(alpha.length)];
+	          c = (alpha)[new Random().nextInt(alpha.length)];
+	          d = (alpha)[new Random().nextInt(alpha.length)];
+	          e = (alpha)[new Random().nextInt(alpha.length)];
+	         }
+	        final String capt = String.valueOf(a) + String.valueOf(b) +String.valueOf(c) + String.valueOf(d) + String.valueOf(e);
+			final Label captlabel = new Label(capt);
+			final TextBox capttext = new TextBox();
+			final Button captcha = new Button("Check Captcha");
+			vpan2.add(html2);
+			vpan2.add(captlabel);
+			vpan2.add(capttext);
+			vpan2.add(captcha);
+			captcha.addClickHandler(new ClickHandler(){
+				@Override
+				public void onClick(ClickEvent event){
+					String usrcapt = capttext.getValue();
+					if(usrcapt.equals(capt))
+					{
+					Window.alert("Success ! Good Job ! Bravo ! Bellisima ! :P ");
+					flag=true;
+					vpan2.setVisible(false);
+					vpan1.setVisible(true);
+					}	    
+					else 
+					{
+						Window.alert("Wrong Captcha");
+						flag=false;
+					}	
+				}
+			});
+		 //Eof Captcha UI
+		RootPanel.get().add(vpan);
+		RootPanel.get().add(vpan1);
+		RootPanel.get().add(vpan2);
+		RootPanel.get().add(vpan3);
+		reg.addClickHandler(new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent event){
+				usercode = ucint.getValue();
+				users[usercode] = text1.getValue();
+				pass[usercode] = text2.getValue();
+				Window.alert("Successfully Registered !");
+				text1.setValue("");
+				text2.setValue("");
+			}
+		});
+		login.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				String tmp1 = text1.getValue();
+				String tmp2 = text2.getValue();
+				if(tmp1.equalsIgnoreCase(users[usercode]) && tmp2.equalsIgnoreCase(pass[usercode]) )
+				{
+					Window.alert("Valid Authentication ! ");
+					flag = true;
+					vpan.setVisible(false);
+					vpan2.setVisible(true);
+				}
+				else
+				{
+					Window.alert("Invalid User, Please try again !");
+					flag = false;
+				}
+			}	
+		});
+		//Eof Login module
+		but1.addClickHandler(new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent event){
+				qn1[usercode] = text3.getValue();
+				qn2[usercode] = text4.getValue();
+				qn3[usercode] = text5.getValue();
+				Window.alert("Successfully Saved the Answers !");
+				text3.setValue("");
+				text4.setValue("");
+				text5.setValue("");
+			}
+		});
+		but2.addClickHandler(new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent event){
+				String tmpp1 = text3.getValue();
+				String tmpp2 = text4.getValue();
+				String tmpp3 = text5.getValue();
+				if(tmpp1.equalsIgnoreCase(qn1[usercode]) && tmpp2.equalsIgnoreCase(qn2[usercode]) && tmpp3.equalsIgnoreCase(qn3[usercode]))
+				{
+					Window.alert("Successfully Logged In ! :O");
+					flag = true;
+					vpan1.setVisible(false);
+					vpan3.setVisible(true);
+				}
+				else
+				{
+					Window.alert("Please check your answers:");
+					flag = false;
+				}
+			}
+		});
+		//Eof Q&A Module
